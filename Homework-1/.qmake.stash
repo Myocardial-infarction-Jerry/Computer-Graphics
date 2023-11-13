@@ -33,6 +33,7 @@ QMAKE_CXX.COMPILER_MACROS = \
     QMAKE_GCC_MINOR_VERSION \
     QMAKE_GCC_PATCH_VERSION
 QMAKE_CXX.INCDIRS = \
+    /opt/homebrew/Cellar/qt/6.6.0/include \
     /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 \
     /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include \
     /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include \
