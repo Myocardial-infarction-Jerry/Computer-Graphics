@@ -39,6 +39,4 @@ QMAKE_CXX.INCDIRS = \
     /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include \
     /Library/Developer/CommandLineTools/usr/include
 QMAKE_CXX.LIBDIRS = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
-QMAKE_MAC_SDK.macosx.SDKVersion = 13.3
-QMAKE_MAC_SDK.macosx.Path = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools
