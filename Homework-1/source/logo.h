@@ -13,9 +13,9 @@ public:
     int vertexCount() const { return m_count / 6; } // 返回顶点数量
 
 private:
-    void quad(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, GLfloat x3, GLfloat y3, GLfloat x4, GLfloat y4); // 绘制顶面和底面
-    void extrude(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2); // 绘制侧面
-    void add(const QVector3D &v, const QVector3D &n);
+    void quad(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, GLfloat x3, GLfloat y3, GLfloat x4, GLfloat y4, const int &axis); // 绘制顶面和底面
+    void extrude(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, const int &axis); // 绘制侧面
+    void add(const QVector3D &v, const QVector3D &n, const int &axis);
 
     QList<GLfloat> m_data; // 存储顶点数据的列表
     int m_count = 0; // 当前顶点数量
