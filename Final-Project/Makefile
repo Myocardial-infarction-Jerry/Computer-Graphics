@@ -23,7 +23,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
 
 run: $(EXECUTABLE)
-	./$(EXECUTABLE)
+	./$(EXECUTABLE) > image.ppm
+	sips -s format png image.ppm --out image.png
 
 clean:
 	rm -rf $(OBJDIR) $(BINDIR)
