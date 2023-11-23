@@ -8,7 +8,8 @@ double hit_sphere(const point3 &center, double radius, const ray &r) {
     vec3 oc = r.origin() - center;
     auto a = r.direction().length_squared();
     auto half_b = dot(oc, r.direction());
-    auto c = oc.length_squared() - radius * radius; auto discriminant = half_b * half_b - a * c;
+    auto c = oc.length_squared() - radius * radius;
+    auto discriminant = half_b * half_b - a * c;
     if (discriminant < 0) {
         return -1.0;
     }
@@ -28,7 +29,7 @@ color ray_color(const ray &r) {
     return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     // Image
     const auto aspect_ratio = 16.0 / 9.0;
     const int image_width = 3840;
@@ -62,4 +63,6 @@ int main() {
     std::chrono::duration<double> duration = end - start;
 
     fprintf(stderr, "\nDone after %6lfs.\n", duration.count());
+
+    return 0;
 }
