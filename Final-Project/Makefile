@@ -26,5 +26,8 @@ run: $(EXECUTABLE)
 	./$(EXECUTABLE) > image.ppm
 	sips -s format png image.ppm --out image.png
 
+debug:
+	lldb ./$(EXECUTABLE)
+
 clean:
 	rm -rf $(OBJDIR) $(BINDIR)
