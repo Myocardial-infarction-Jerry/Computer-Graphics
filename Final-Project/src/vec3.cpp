@@ -19,7 +19,7 @@ vec3 vec3::operator-()const { return vec3(-e[0], -e[1], -e[2]); }
 double vec3::operator[](int i) const { return e[i]; }
 double &vec3::operator[](int i) { return e[i]; }
 double vec3::length() const { return std::sqrt(length_squared()); }
-double vec3::length_squared() const { return e[0] * e[0] + e[1] * e[1] + e[2] * e[2]; }
+double vec3::length_squared() const { return dot(*this, *this); }
 vec3 vec3::unit() const { return *this / length(); }
 
 vec3 vec3::operator+(const vec3 &v) const { return vec3(e[0] + v[0], e[1] + v[1], e[2] + v[2]); }
