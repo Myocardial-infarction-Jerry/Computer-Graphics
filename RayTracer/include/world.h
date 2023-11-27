@@ -2,17 +2,17 @@
 #define WORLD_H
 
 #include "color.h"
-#include "surface.h"
+#include "volume.h"
+#include "camera.h"
 
 class world {
 public:
     world();
 
-    vector<vector<color>> *render()
 
 private:
-    vector<camera> cams;
-    vector<surface> surs;
+    std::vector<camera> cams;
+    std::vector<surface> surs;
 };
 
 #endif
