@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/Users/qiu_nangong/Documents/Github/Computer-Graphics/raytracing.github.io-release")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/Users/qiu_nangong/Documents/Github/Computer-Graphics/raytracing.github.io-release")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/Users/qiu_nangong/Documents/GitHub/Computer-Graphics/raytracing.github.io-release")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/qiu_nangong/Documents/Github/Computer-Graphics/raytracing.github.io-release/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/qiu_nangong/Documents/GitHub/Computer-Graphics/raytracing.github.io-release/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
