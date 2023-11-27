@@ -2,9 +2,7 @@
 
 color::color() :r(0), g(0), b(0) {}
 color::color(const int &_r, const int &_g, const int &_b) :r(_r), g(_g), b(_b) {}
-color::color(const color &c) :r(c.r), g(c.g), b(c.b) {}
-
-color &color::operator=(const color &c) { r = c.r, g = c.g, b = c.b; return *this; }
+color::color(const vec3 &v) :r(static_cast<int>(v[0])), g(static_cast<int>(v[1])), b(static_cast<int>(v[2])) {}
 
 color average_color(std::initializer_list<color> list) {
     int r = 0, g = 0, b = 0;

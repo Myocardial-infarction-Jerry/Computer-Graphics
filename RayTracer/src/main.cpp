@@ -1,5 +1,5 @@
 #include "utils.h"
-#include "camera.h"
+#include "world.h"
 
 extern std::ofstream fp;
 
@@ -11,7 +11,7 @@ int main(int argc, char const *argv[]) {
 
     fp = std::ofstream(argv[1]);
 
-    camera cam;
+    world flat;
 
     fp.close();
 
