@@ -29,5 +29,5 @@ void world::render(std::ostream &out, const camera &cam) {
             }
     }
 
-
+    // Stuck here, thinking how to handle ray refraction
 }
