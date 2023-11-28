@@ -9,6 +9,7 @@ camera::camera() {
     image_height = 1080;
     viewport_width = 2.0;
     viewport_height = 1.125;
+    sample_per_pixel = 1;
 }
 
 point3 camera::get_position() const { return position; }
@@ -19,6 +20,7 @@ int camera::get_image_width() const { return image_width; }
 int camera::get_image_height() const { return image_height; }
 double camera::get_viewport_width() const { return viewport_width; }
 double camera::get_viewport_height() const { return viewport_height; }
+int camera::get_sample_per_pixel() const { return sample_per_pixel; }
 
 void camera::set_position(const point3 &_position) { position = _position; }
 void camera::set_direction(const vec3 &_direction) { direction = _direction; }
@@ -44,3 +46,4 @@ void camera::set_viewport_height(const double &_viewpost_height) {
     viewport_height = _viewpost_height;
     viewport_width = viewport_height * (static_cast<double>(image_width) / image_height);
 }
+void camera::set_sample_per_pixel(const int &_sample_per_pixel) { sample_per_pixel = _sample_per_pixel; }

@@ -10,4 +10,6 @@ using std::cerr;
 
 std::ofstream fp;
 
+double randf() { return double(rand()) / RAND_MAX; }
+
 #endif

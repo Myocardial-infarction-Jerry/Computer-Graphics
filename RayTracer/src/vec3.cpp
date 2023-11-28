@@ -25,12 +25,12 @@ vec3 &vec3::operator-=(const vec3 &v) { e[0] -= v[0], e[1] -= v[1], e[2] -= v[2]
 vec3 &vec3::operator*=(const double &val) { e[0] *= val, e[1] *= val, e[2] *= val; return *this; }
 vec3 &vec3::operator/=(const double &val) { e[0] /= val, e[1] /= val, e[2] /= val; return *this; }
 
-double vec3::dot(const vec3 &v) const { return e[0] * v[0] + e[1] * v[1] + e[2] * v[2]; }
-vec3 vec3::cross(const vec3 &v) const {
+double dot(const vec3 &u, const vec3 &v) { return u[0] * v[0] + u[1] * v[1] + u[2] * v[2]; }
+vec3 cross(const vec3 &u, const vec3 &v) {
     return vec3(
-        e[1] * v[2] - e[2] * v[1],
-        e[2] * v[0] - e[0] * v[2],
-        e[0] * v[1] - e[1] * v[0]
+        u[1] * v[2] - u[2] * v[1],
+        u[2] * v[0] - u[0] * v[2],
+        u[0] * v[1] - u[1] * v[0]
     );
 }
 

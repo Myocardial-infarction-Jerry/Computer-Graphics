@@ -15,6 +15,7 @@ public:
     int get_image_height() const;
     double get_viewport_width() const;
     double get_viewport_height() const;
+    int get_sample_per_pixel() const;
 
     void set_position(const point3 &_position);
     void set_direction(const vec3 &_direction);
@@ -24,6 +25,7 @@ public:
     void set_image_height(const int &_image_height);
     void set_viewport_width(const double &_viewport_width);
     void set_viewport_height(const double &_viewpost_height);
+    void set_sample_per_pixel(const int &_sample_per_pixel);
 
 private:
     point3 position;
@@ -32,6 +34,7 @@ private:
     double aspect_ratio;
     int image_width, image_height;
     double viewport_width, viewport_height;
+    int sample_per_pixel;
 };
 
 #endif

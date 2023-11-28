@@ -2,24 +2,27 @@
 #define VOLUME_H
 
 #include <vector>
+#include <cmath>
 
 #include "vec3.h"
 #include "color.h"
+#include "ray.h"
 
-class surface {
+class volume {
 public:
-    surface();
-protected:
-    std::vector<vec3> ver;
+    color(*shader)(const vec3 &);
 
-    void add_vertex(const vec3 &vertex);
-    virtual color shader(const int &index) const;
+    volume(color(*_shader)(const vec3 &));
+    virtual color ray_color(const ray &r, std::vector<ray> &subray);
 };
 
-class sphere :public surface {
+class sphere :protected volume {
 public:
-    sphere(const point3 &_center, const double &_radius, color(*_shader)(const vec3 &), const int &_div);
-    color(*shader)(const vec3 &);
+    point3 center;
+    double radius;
+
+    sphere(const point3 &_center, const double &_radius, color(*_shader)(const vec3 &));
+    color ray_color(const ray &r, std::vector<ray> &subray);
 };
 
 #endif

@@ -30,8 +30,8 @@ public:
     vec3 &operator*=(const double &val);
     vec3 &operator/=(const double &val);
 
-    double dot(const vec3 &v) const;
-    vec3 cross(const vec3 &v) const;
+    friend double dot(const vec3 &u, const vec3 &v);
+    friend vec3 cross(const vec3 &u, const vec3 &v);
 
     double length() const;
     double squared_length() const;
