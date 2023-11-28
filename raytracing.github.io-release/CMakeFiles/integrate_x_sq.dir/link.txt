@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/integrate_x_sq.dir/src/TheRestOfYourLife/integrate_x_sq.cc.o -o integrate_x_sq 
