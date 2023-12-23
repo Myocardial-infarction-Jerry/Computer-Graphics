@@ -24,15 +24,25 @@ struct FragmentAttr {
     vec3 color = vec3(1.0f, 1.0f, 1.0f);
     vec3 normal;
     vec3 pos_mv;
-    FragmentAttr(){}
-    FragmentAttr(int xx, int yy, float zz, int in_edgeID) :x(xx), y(yy), z(zz), edgeID(in_edgeID) {
-    }
+    FragmentAttr() {}
+    FragmentAttr(int xx, int yy, float zz, int in_edgeID) :x(xx), y(yy), z(zz), edgeID(in_edgeID) {}
 };
 
 
 struct Triangle {
-    vec3* triangleVertices;
-    vec3* triangleNormals;
+    vec3 *triangleVertices;
+    vec3 *triangleNormals;
+
+    // Triangle() :triangleVertices(nullptr), triangleNormals(nullptr) {}
+    // Triangle(const Triangle &val) {
+    //     triangleVertices = new vec3[3];
+    //     triangleNormals = new vec3[3];
+    //     for (int i = 0; i < 3; ++i) {
+    //         triangleVertices[i] = val.triangleVertices[i];
+    //         triangleNormals[i] = val.triangleNormals[i];
+    //     }
+    // }
+    // ~Triangle() { delete[] triangleVertices; delete[] triangleNormals; }
 };
 
 struct Model {
@@ -42,17 +52,17 @@ struct Model {
     int normalCot;
     vec3 centralPoint;
     vec3 vertices_data[MAX_VERTICES_COT];
-    int** triangles;
-    int** triangle_normals;
+    int **triangles;
+    int **triangle_normals;
     vec3 normals_data[MAX_VERTICES_COT];
     std::string loadedPath = "";
 
     Model() {
-        triangles = new int* [MAX_TRIANGLE_COT];
+        triangles = new int *[MAX_TRIANGLE_COT];
         for (int i = 0; i < MAX_TRIANGLE_COT; ++i) {
             triangles[i] = new int[3];
         }
-        triangle_normals = new int* [MAX_TRIANGLE_COT];
+        triangle_normals = new int *[MAX_TRIANGLE_COT];
         for (int i = 0; i < MAX_TRIANGLE_COT; ++i) {
             triangle_normals[i] = new int[3];
         }
@@ -60,10 +70,10 @@ struct Model {
 
     Triangle getTriangleByID(int id) {
         assert(id < triangleCount);
-        int* nowTirVerIDs = triangles[id];
-        int* nowTriNormIDs = triangle_normals[id];
-        vec3 nowTriangleVertices[3];
-        vec3 nowTriNorms[3];
+        int *nowTirVerIDs = triangles[id];
+        int *nowTriNormIDs = triangle_normals[id];
+        vec3 *nowTriangleVertices = new vec3[3];
+        vec3 *nowTriNorms = new vec3[3];
         nowTriangleVertices[0] = vertices_data[nowTirVerIDs[0]];
         nowTriangleVertices[1] = vertices_data[nowTirVerIDs[1]];
         nowTriangleVertices[2] = vertices_data[nowTirVerIDs[2]];
@@ -77,7 +87,7 @@ struct Model {
         return nowTriangle;
     }
 
-    void loadModel(const std::string& path) {
+    void loadModel(const std::string &path) {
         if (path == loadedPath)
             return;
         loadedPath = path;
@@ -127,6 +137,6 @@ struct Model {
     }
 };
 
-FragmentAttr getLinearInterpolation(const FragmentAttr& a, FragmentAttr& b, int x_position);
-void renderWithTexture(vec3* render_buffer,int w,int h);
+FragmentAttr getLinearInterpolation(const FragmentAttr &a, FragmentAttr &b, int x_position);
+void renderWithTexture(vec3 *render_buffer, int w, int h);
 #endif // UTILS.H

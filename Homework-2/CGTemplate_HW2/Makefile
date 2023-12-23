@@ -15,8 +15,8 @@ EQ            = =
 CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
-CFLAGS        = -pipe -g -O2 -D_REENTRANT -Wall -Wextra -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -g -O2 -std=gnu++11 -D_REENTRANT -Wall -Wextra -fPIC $(DEFINES)
+CFLAGS        = -pipe -g -Wno-note -O2 -D_REENTRANT -Wall -Wextra -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -g -Wno-note -O2 -std=gnu++11 -D_REENTRANT -Wall -Wextra -fPIC $(DEFINES)
 INCPATH       = -I. -Iglm -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f

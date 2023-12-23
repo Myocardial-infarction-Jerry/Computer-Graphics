@@ -23,7 +23,7 @@
 
 using namespace glm;
 
-class MyGLWidget : public QOpenGLWidget{
+class MyGLWidget : public QOpenGLWidget {
     Q_OBJECT
 
 public:
@@ -34,19 +34,19 @@ protected:
     void initializeGL() override;
     void paintGL() override;
     void resizeGL(int width, int height) override;
-    void keyPressEvent(QKeyEvent* e);
+    void keyPressEvent(QKeyEvent *e);
 
 private:
-    void scene_0();
-    void scene_1();
+    void scene();
     void drawTriangle(Triangle triangle);
-    int edge_walking();
-    void bresenham(FragmentAttr start, FragmentAttr end, int id);
-    void clearBuffer(vec3* now_render_buffer);
-    void clearBuffer(int* now_buffer);
-    void clearZBuffer(float* now_buffer);
+    vec2 edge_walking(FragmentAttr *p);
+    void bresenham(FragmentAttr &start, FragmentAttr &end, int id);
+    void clearBuffer(vec3 *now_render_buffer);
+    void clearBuffer(int *now_buffer);
+    void clearZBuffer(float *now_buffer);
     void resizeBuffer(int newW, int newH);
-    vec3 PhoneShading(FragmentAttr& nowPixelResult);
+    vec3 PhoneShading(FragmentAttr &nowPixelResult);
+    int posConvert(const int &x, const  int &y);
 
     int WindowSizeH = 0;
     int WindowSizeW = 0;
@@ -54,10 +54,10 @@ private:
     int degree = 0;
 
     // buffers
-    vec3* render_buffer;
-    vec3* temp_render_buffer;
-    float* temp_z_buffer;
-    float* z_buffer;
+    vec3 *render_buffer;
+    vec3 *temp_render_buffer;
+    float *temp_z_buffer;
+    float *z_buffer;
     vec2 offset;
 
     Model objModel;
