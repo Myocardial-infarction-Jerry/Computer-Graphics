@@ -1,5 +1,5 @@
 #include "utils.h"
-FragmentAttr getLinearInterpolation(const FragmentAttr& a, FragmentAttr& b, int x_position){
+FragmentAttr getLinearInterpolation(const FragmentAttr &a, FragmentAttr &b, int x_position) {
     FragmentAttr result;
     result.x = x_position;
     float t = (x_position - a.x) / float(b.x - a.x);
@@ -21,16 +21,15 @@ FragmentAttr getLinearInterpolation(const FragmentAttr& a, FragmentAttr& b, int 
     return result;
 }
 
-
-void renderWithTexture(vec3* render_buffer,int h, int w) {
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-	glEnable(GL_TEXTURE_2D);	
-	GLuint texID;
+void renderWithTexture(vec3 *render_buffer, int h, int w) {
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+    glEnable(GL_TEXTURE_2D);
+    GLuint texID;
     glGenTextures(1, &texID);
     glBindTexture(GL_TEXTURE_2D, texID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -38,19 +37,19 @@ void renderWithTexture(vec3* render_buffer,int h, int w) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_FLOAT, render_buffer);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texID);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex2f(-1.0f, -1.0f);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex2f(-1.0f, 1.0f);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex2f(1.0f, 1.0f);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex2f(1.0f, -1.0f);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glPopAttrib();
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex2f(-1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex2f(-1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex2f(1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex2f(1.0f, -1.0f);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glPopAttrib();
 }

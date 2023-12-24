@@ -41,6 +41,7 @@ private:
     void drawTriangle(Triangle triangle);
     vec2 edge_walking(FragmentAttr *p);
     void bresenham(FragmentAttr &start, FragmentAttr &end, int id);
+    void DDA(FragmentAttr &start, FragmentAttr &end, int id);
     void clearBuffer(vec3 *now_render_buffer);
     void clearBuffer(int *now_buffer);
     void clearZBuffer(float *now_buffer);

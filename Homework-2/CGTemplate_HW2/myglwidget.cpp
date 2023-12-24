@@ -126,13 +126,13 @@ void MyGLWidget::drawTriangle(Triangle triangle) {
 
 	// 将当前三角形渲染在temp_buffer中
 
-	// HomeWork: 1、绘制三角形三边
-	// bresenham(transformedVertices[0], transformedVertices[1], 1);
-	// bresenham(transformedVertices[1], transformedVertices[2], 2);
-	// bresenham(transformedVertices[2], transformedVertices[0], 3);
-
 	// HomeWork: 2: 用edge-walking填充三角形内部到temp_buffer中
 	vec2 changeLine = edge_walking(transformedVertices);
+
+	// HomeWork: 1、绘制三角形三边
+	bresenham(transformedVertices[0], transformedVertices[1], 1);
+	bresenham(transformedVertices[1], transformedVertices[2], 2);
+	bresenham(transformedVertices[2], transformedVertices[0], 3);
 
 	// 合并temp_buffer 到 render_buffer, 深度测试
 	// 从firstChangeLine开始遍历，可以稍快
@@ -161,31 +161,36 @@ vec2 MyGLWidget::edge_walking(FragmentAttr *p) {
 			if (p[i].x > p[j].x)
 				std::swap(p[i], p[j]);
 
-	vec3 color = vec3(1, 1, 1);// * log(glm::length(p[0].pos_mv + p[1].pos_mv + p[2].pos_mv - camPosition * 3));
-
-	float d1 = (float)(p[1].y - p[0].y) / (p[1].x - p[0].x);
-	float d2 = (float)(p[2].y - p[0].y) / (p[2].x - p[0].x);
+	float d1 = (float)(p[1].y - p[0].y) / (float)(p[1].x - p[0].x);
+	float d2 = (float)(p[2].y - p[0].y) / (float)(p[2].x - p[0].x);
 
 	for (int x = p[0].x; x < p[1].x; ++x) {
-		int y1 = d1 * (x - p[0].x) + p[0].y;
-		int y2 = d2 * (x - p[0].x) + p[0].y;
+		int y1 = d1 * (float)(x - p[0].x) + (float)(p[0].y);
+		int y2 = d2 * (float)(x - p[0].x) + (float)(p[0].y);
 		if (y1 > y2) std::swap(y1, y2);
 		for (int y = y1; y <= y2; ++y) {
 			int pos = posConvert(y, x);
-			temp_render_buffer[pos] = color;
-			temp_z_buffer[pos] = p[0].z + ((x - p[0].x) * (p[1].z - p[0].z) + (y - p[0].y) * (p[2].z - p[0].z)) / ((p[1].x - p[0].x) * (p[2].y - p[0].y) - (p[2].x - p[0].x) * (p[1].y - p[0].y));
+			FragmentAttr loc;
+			loc.pos_mv = p[0].pos_mv + ((p[1].pos_mv - p[0].pos_mv) * (float)(x - p[0].x) + (p[2].pos_mv - p[0].pos_mv) * (float)(y - p[0].y)) / (float)((p[1].x - p[0].x) * (p[2].y - p[0].y) - (p[2].x - p[0].x) * (p[1].y - p[0].y));
+			loc.normal = p[0].normal + ((p[1].normal - p[0].normal) * (float)(x - p[0].x) + (p[2].normal - p[0].normal) * (float)(y - p[0].y)) / (float)((p[1].x - p[0].x) * (p[2].y - p[0].y) - (p[2].x - p[0].x) * (p[1].y - p[0].y));
+			temp_render_buffer[pos] = PhoneShading(loc);
+			temp_z_buffer[pos] = p[0].z + ((float)(x - p[0].x) * (p[1].z - p[0].z) + (float)(y - p[0].y) * (p[2].z - p[0].z)) / (float)((p[1].x - p[0].x) * (p[2].y - p[0].y) - (p[2].x - p[0].x) * (p[1].y - p[0].y));
 		}
 	}
 
-	d1 = (float)(p[2].y - p[1].y) / (p[2].x - p[1].x);
+	d1 = (float)(p[2].y - p[1].y) / (float)(p[2].x - p[1].x);
+
 	for (int x = p[1].x; x < p[2].x; ++x) {
-		int y1 = d1 * (x - p[1].x) + p[1].y;
-		int y2 = d2 * (x - p[0].x) + p[0].y;
+		int y1 = d1 * (float)(x - p[1].x) + (float)(p[1].y);
+		int y2 = d2 * (float)(x - p[0].x) + (float)(p[0].y);
 		if (y1 > y2) std::swap(y1, y2);
 		for (int y = y1; y <= y2; ++y) {
 			int pos = posConvert(y, x);
-			temp_render_buffer[pos] = color;
-			temp_z_buffer[pos] = p[0].z + ((x - p[0].x) * (p[1].z - p[0].z) + (y - p[0].y) * (p[2].z - p[0].z)) / ((p[1].x - p[0].x) * (p[2].y - p[0].y) - (p[2].x - p[0].x) * (p[1].y - p[0].y));
+			FragmentAttr loc;
+			loc.pos_mv = p[0].pos_mv + ((p[1].pos_mv - p[0].pos_mv) * (float)(x - p[0].x) + (p[2].pos_mv - p[0].pos_mv) * (float)(y - p[0].y)) / (float)((p[1].x - p[0].x) * (p[2].y - p[0].y) - (p[2].x - p[0].x) * (p[1].y - p[0].y));
+			loc.normal = p[0].normal + ((p[1].normal - p[0].normal) * (float)(x - p[0].x) + (p[2].normal - p[0].normal) * (float)(y - p[0].y)) / (float)((p[1].x - p[0].x) * (p[2].y - p[0].y) - (p[2].x - p[0].x) * (p[1].y - p[0].y));
+			temp_render_buffer[pos] = PhoneShading(loc);
+			temp_z_buffer[pos] = p[0].z + ((float)(x - p[0].x) * (p[1].z - p[0].z) + (float)(y - p[0].y) * (p[2].z - p[0].z)) / (float)((p[1].x - p[0].x) * (p[2].y - p[0].y) - (p[2].x - p[0].x) * (p[1].y - p[0].y));
 		}
 	}
 
@@ -193,7 +198,30 @@ vec2 MyGLWidget::edge_walking(FragmentAttr *p) {
 }
 
 vec3 MyGLWidget::PhoneShading(FragmentAttr &nowPixelResult) {
-	return vec3(0, 0, 0);
+	vec3 ambientColor = vec3(0.2f, 0.2f, 0.2f); // 环境光颜色
+	vec3 diffuseColor = vec3(0.8f, 0.8f, 0.8f); // 漫反射颜色
+	vec3 specularColor = vec3(1.0f, 1.0f, 1.0f); // 镜面反射颜色
+	vec3 lightColor = vec3(1.0f, 1.0f, 1.0f); // 光源颜色
+
+	vec3 lightDirection = glm::normalize(lightPosition - nowPixelResult.pos_mv); // 光源方向
+	vec3 normal = glm::normalize(nowPixelResult.normal); // 法线向量
+
+	// 计算环境光照
+	vec3 ambient = ambientColor * lightColor;
+
+	// 计算漫反射光照
+	float diffuseFactor = glm::max(glm::dot(normal, lightDirection), 0.0f);
+	vec3 diffuse = diffuseColor * lightColor * diffuseFactor;
+
+	// 计算镜面反射光照
+	vec3 viewDirection = glm::normalize(camPosition - nowPixelResult.pos_mv); // 视线方向
+	vec3 reflectDirection = glm::reflect(-lightDirection, normal); // 反射光线方向
+	float specularFactor = glm::pow(glm::max(glm::dot(viewDirection, reflectDirection), 0.0f), 32.0f);
+	vec3 specular = specularColor * lightColor * specularFactor;
+
+	// 综合所有光照分量
+	vec3 finalColor = ambient + diffuse + specular;
+	return finalColor;
 }
 
 void MyGLWidget::bresenham(FragmentAttr &start, FragmentAttr &end, int id) {
@@ -226,6 +254,21 @@ void MyGLWidget::bresenham(FragmentAttr &start, FragmentAttr &end, int id) {
 			y += ystep;
 			err += dx;
 		}
+	}
+}
+
+void MyGLWidget::DDA(FragmentAttr &start, FragmentAttr &end, int id) {
+	float dx = end.x - start.x;
+	float dy = end.y - start.y;
+	float step = max(fabs(dx), fabs(dy));
+	dx /= step, dy /= step;
+
+	float x = start.x, y = start.y;
+	for (int i = 0; i < step; ++i) {
+		x += dx, y += dy;
+		int pos = posConvert((int)(y + 0.5), (int)(x + 0.5));
+		temp_render_buffer[pos] = vec3(0.6015625, 1, 0.6015625);
+		temp_z_buffer[pos] = (float)(i) / step * (end.z - start.z) + start.z;
 	}
 }
 
